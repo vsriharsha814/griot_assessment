@@ -9,7 +9,7 @@ const Footer = () => {
         <footer className={isHomePage ? "homePage_footer otherPage_footer" : "otherPage_footer"}>
             <div className="container">
                 <h4>PROPERTY RENTAL</h4>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero, sed quae vel illo iste, amet adipisci ad dolorem voluptatem ea doloribus labore accusamus explicabo maiores minus, excepturi est dolorum ullam?</p>
+                <p>Hello, the pain itself is a love of consectetur adipisicing elite. True, but what or that this, love to achieve to pain pleasure that pains work accuse explain greater less, except is pain any?</p>
                 <ul>
                     <li>
                         <Link to={'/'}>Home</Link>    
@@ -25,8 +25,8 @@ const Footer = () => {
             <div className="container">
                 <h4>Connect with us</h4>
                 <p>+91 000 000 0000</p>
-                <p>rs@gmail.com</p>
-                <p>All Rights Reservsed By RS</p>
+                <p>ozgur@gmail.com</p>
+                <p>All Rights Reservsed By Ozgur</p>
             </div>
         </footer>
     </>
