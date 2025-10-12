@@ -12,10 +12,10 @@ const About = () => {
             error sit dignissimos illum optio, numquam molestias quod! Sed?
           </p>
           <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi
-            voluptate vel quaerat sit repellat odio accusantium amet culpa a
-            dignissimos ab, excepturi ipsum delectus officiis, rem optio ex
-            recusandae eum.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodity
+            pleasure or seek is repel hatred accusers love blame a
+            most worthy from, excepturi ipsum delectus officiis, rem optio ex
+            refuse him.
           </p>
           <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate

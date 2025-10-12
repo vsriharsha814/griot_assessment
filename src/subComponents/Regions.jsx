@@ -5,7 +5,7 @@ const Regions = () => {
     <>
       <section id='regions'>
         <h1>OUR REGIONS</h1>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem, accusantium quo! Expedita sint iusto quaerat excepturi velit similique.</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Indeed, accusers where! Expedita are just to seek except will like.</p>
         <div className="region_container">
         <div className="card">
          <img src="/region1.jpg" alt="mountains" />
