@@ -6,9 +6,9 @@ const Contact = () => {
     <>
       <section id="contact">
         <h1>CONTACT US</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error.</p>
+        <p>Questions about a listing, a bid, or hosting your own place? We read every message.</p>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unless something similar pleasure!
+          Our support team is here weekdays 9am–6pm Pacific. For urgent trip issues, mention your booking reference in the subject line.
         </p>
         <div className="container">
           <img src="https://plus.unsplash.com/premium_photo-1661749309788-0bba60b81222?w=800&q=80" alt="about" />
@@ -16,15 +16,15 @@ const Contact = () => {
               <h3>Let&apos;s connect</h3>
               <div>
                 <p>Phone</p>
-                <span>+91 000 000 0000</span>
+                <span>+1 (555) 010-2044</span>
               </div>
               <div>
                 <p>Email</p>
-                <span>ozgur@gmail.com</span>
+                <span>hello@griotrentals.demo</span>
               </div>
               <div>
                 <p>Address</p>
-                <span>House No.123 Sector A-1</span>
+                <span>428 Harbor View Ave, Suite 300, Portland, OR 97201</span>
               </div>
               <ul>
                 <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" aria-label="Facebook">

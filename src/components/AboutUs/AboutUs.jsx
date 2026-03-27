@@ -7,9 +7,9 @@ const AboutUs = () => {
         <img src="/about.jpg" alt="about" />
         <div className="content">
           <h3>Your peace of mind, our priority!</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem magnam totam alias harum sit facilis.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi iste perferendis ab quod deserunt ipsam pariatur minus sit assumenda, voluptatem commodi reiciendis, est dicta fuga?</p>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio sunt consequatur dolorem saepe pariatur nulla molestiae a labore!</p>
+          <p>Griot started as a weekend project between two friends who were tired of opaque pricing and endless email threads just to book a cabin.</p>
+          <p>Today we focus on clear starting bids, honest photos, and tools that keep guests and hosts on the same page before anyone packs a bag.</p>
+          <p>Whether you are planning a family reunion or a solo reset, we want finding the right place to feel straightforward—not like a second job.</p>
         </div>
       </div>
       <AboutComponentMini />

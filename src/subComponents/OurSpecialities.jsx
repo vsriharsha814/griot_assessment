@@ -10,31 +10,31 @@ const OurSpecialities = () => {
       id: 1,
       title: "Seafront",
       icon: <SiWeightsandbiases />,
-      subText: "Have a look"
+      subText: "Wake up to the water"
     },
     {
       id: 2,
       title: "Pet Friendly",
       icon: <MdOutlinePets />,
-      subText: "Pets allowed"
+      subText: "Bring your companions"
     },
     {
       id: 3,
       title: "Electric Car",
       icon: <MdElectricCar />,
-      subText: "Change your car"
+      subText: "Charging on site"
     },
     {
       id: 4,
       title: "Fitness/Gym",
       icon: <MdFitnessCenter />,
-      subText: "Work out"
+      subText: "Stay on your routine"
     },
     {
       id: 5,
       title: "Boat Morning",
       icon: <FaSailboat />,
-      subText: "Take a trip"
+      subText: "Harbor mornings"
     },
   ];
   return (

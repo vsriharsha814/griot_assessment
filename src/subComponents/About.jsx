@@ -8,23 +8,16 @@ const About = () => {
           <div className="content">
           <h1>ABOUT US</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus
-            error sit dignissimos illum optio, numquam molestias quod! Sed?
+            We are a small team obsessed with well-lit photos, accurate square footage, and hosts who actually answer the phone.
           </p>
           <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodity
-            pleasure or seek is repel hatred accusers love blame a
-            most worthy from, excepturi ipsum delectus officiis, rem optio ex
-            refuse him.
+            Every listing on the demo site is seeded for evaluation, but the flow mirrors what we would ship: browse, compare, bid, and manage your stays in one place.
           </p>
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate
-            nihil voluptatibus accusamus minus voluptatum dolores dignissimos
-            velit nisi neque facere.
+            Hosts get a simple inventory view; guests see starting bids in USD and can drill into details before they commit.
           </p>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio quam
-            voluptatibus necessitatibus? Ratione, omnis quo.
+            Feedback welcome—we are iterating fast and your notes help us prioritize what to build next.
           </p>
           </div>
           <button>We strive to offer you best possible homes to stay!</button>

@@ -11,15 +11,15 @@ const SubContact = () => {
           <h3>Let&apos;s connect</h3>
           <div>
             <p>Phone</p>
-            <span>+91 000 000 0000</span>
+            <span>+1 (555) 010-2044</span>
           </div>
           <div>
             <p>Email</p>
-            <span>rs@gmail.com</span>
+            <span>hello@griotrentals.demo</span>
           </div>
           <div>
             <p>Address</p>
-            <span>House No.123 Sector A-1</span>
+            <span>428 Harbor View Ave, Suite 300, Portland, OR 97201</span>
           </div>
           <ul>
           <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" aria-label="Facebook"><RiFacebookBoxLine/></a>
