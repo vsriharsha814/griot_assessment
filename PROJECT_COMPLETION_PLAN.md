@@ -65,8 +65,8 @@ This plan is based on the current repository state and the intended feature set 
   - ✅ enforce bid validation rules
   - return clear bid history
 - Auth:
-  - tighten signup/login validation
-  - correct duplicate-user logic and role handling
+  - ✅ tighten signup/login validation
+  - ✅ correct duplicate-user logic and role handling
 - Chat:
   - either fully wire routes + storage + socket flow, or defer cleanly
 - ✅ Add API docs (OpenAPI or markdown endpoint table).

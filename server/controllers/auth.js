@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const { validationResult } = require('express-validator');
+const { normalizeRole } = require('../utils/authValidation');
 
 exports.signup = async (req, res) => {
   try {
@@ -15,13 +16,15 @@ exports.signup = async (req, res) => {
 
     // Extract user data from request body
     const { username, email, password, role } = req.body;
-
-    console.log('Signup data:', { username, email, role });
+    const normalizedRole = normalizeRole(role);
+    if (!normalizedRole) {
+      return res.status(400).json({ error: 'Role must be either buyer or seller' });
+    }
 
     // Check if the user already exists
-    const existingUser = await User.findOne({ role, email});
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ error: 'User with this email already exists for role ${role}' });
+      return res.status(400).json({ error: 'User with this email already exists' });
     }
 
     // Hash the password
@@ -32,14 +35,13 @@ exports.signup = async (req, res) => {
       username,
       email,
       password: hashedPassword,
-      role,
+      role: normalizedRole,
     });
 
     // Save the user to the database
     await newUser.save();
 
-    res.status(201).json({ message: 'User created successfully', role });
-    console.log('getting the role',role)
+    res.status(201).json({ message: 'User created successfully', role: normalizedRole });
   } catch (error) {
     console.error('Error signing up:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -56,8 +58,11 @@ exports.login = async (req, res) => {
     
     // Extract user data from request body
     const { email, password, role } = req.body;
-    
-    console.log('user role is:', role)
+    const requestedRole = role ? normalizeRole(role) : null;
+    if (role && !requestedRole) {
+      return res.status(400).json({ error: 'Role must be either buyer or seller' });
+    }
+
     // Check if the user exists
     const user = await User.findOne({ email });
     if (!user) {
@@ -70,7 +75,7 @@ exports.login = async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    if (req.body.role && user.role !== req.body.role) {
+    if (requestedRole && user.role !== requestedRole) {
         return res.status(401).json({ error: 'Invalid credentials for the selected role' });
     }
 
@@ -78,8 +83,6 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, {
       expiresIn: '1h',
     });
-    console.log(user.role)
-
     res.json({ token, userId: user._id, role: user.role });
   } catch (error) {
     console.error('Error logging in:', error);

@@ -11,6 +11,7 @@ router.post(
     check('username').not().isEmpty().withMessage('Username is required'),
     check('email').isEmail().withMessage('Invalid email'),
     check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
+    check('role').optional().isIn(['buyer', 'seller']).withMessage('Role must be buyer or seller'),
   ],
   authController.signup
 );
@@ -21,6 +22,7 @@ router.post(
   [
     check('email').isEmail().withMessage('Invalid email'),
     check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
+    check('role').optional().isIn(['buyer', 'seller']).withMessage('Role must be buyer or seller'),
   ],
   authController.login
 );
