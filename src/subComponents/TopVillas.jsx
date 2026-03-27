@@ -1,5 +1,4 @@
-import React from "react";
-import { villas } from "../villas";
+import React, { useEffect, useState } from "react";
 import { RxDot } from "react-icons/rx";
 import { IoIosPeople } from "react-icons/io";
 import { FaBed } from "react-icons/fa";
@@ -7,59 +6,100 @@ import { BiArea } from "react-icons/bi";
 import { FaBath } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { formatUSD } from "../utils/currency";
+import { mediaUrl } from "../utils/media";
+import { getAllProducts } from "../api/products";
 
 const TopVillas = () => {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      try {
+        setError("");
+        const products = await getAllProducts();
+        if (!cancelled && Array.isArray(products)) {
+          setItems(products.slice(0, 3));
+        }
+      } catch {
+        if (!cancelled) {
+          setError("Could not load featured listings.");
+          setItems([]);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <section id="topVillas">
       <h1>TOP PICK VILLAS</h1>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum esse
-        consequuntur eius, sed quos, itaque earum eos dolor minima delectus
-        sequi exercitationem dolorem illo dicta provident voluptatum nihil nam.
-        Assumenda!
+        Hand-picked from live listings. Open a property to view details and place a bid.
       </p>
-      <div className="villasContainer">
-        {villas.slice(0,3).map((element) => {
-          return (
-              <Link to={`/villa/${element.id}`} className="card" key={element.id}>
-                <img src={element.image} alt={element.name} />
+      {loading && <p style={{ textAlign: "center" }}>Loading featured listings...</p>}
+      {!loading && error && <p style={{ textAlign: "center" }}>{error}</p>}
+      {!loading && !error && items.length === 0 && (
+        <p style={{ textAlign: "center" }}>
+          No listings yet.{" "}
+          <Link to="/villas">Browse all properties</Link>
+        </p>
+      )}
+      {!loading && items.length > 0 ? (
+        <div className="villasContainer">
+          {items.map((product) => {
+            const id = product._id;
+            const imageSrc = mediaUrl(product.imageUrl) || "/villa1.jpg";
+            const title = product.name || "Listing";
+            const starting = product.startingBid ?? 0;
+            return (
+              <Link to={`/villa/${id}`} className="card" key={id}>
+                <img src={imageSrc} alt={title} />
                 <div className="location_text">
-                  <span>{element.location}</span>
+                  <span>Featured</span>
                   <span>
                     <RxDot />
                   </span>
-                  <span>{element.category}</span>
+                  <span>Property</span>
                 </div>
-                <div className="title_text">{element.name}</div>
+                <div className="title_text">{title}</div>
                 <div className="specifications">
                   <div className="spec">
                     <IoIosPeople />
-                    <span>{element.guests}</span>
+                    <span>—</span>
                     Guests
                   </div>
                   <div className="spec">
                     <FaBed />
-                    <span>{element.bedrooms}</span>
+                    <span>—</span>
                     Bedrooms
                   </div>
                   <div className="spec">
                     <BiArea />
-                    <span>{element.squareMeter}</span>
+                    <span>—</span>
                     Area
                   </div>
                   <div className="spec">
                     <FaBath />
-                    <span>{element.bathrooms}</span>
+                    <span>—</span>
                     Bathrooms
                   </div>
                 </div>
                 <div className="badge">
-                  From <span>{formatUSD(element.dailyRent)} / Night </span>
+                  From <span>{formatUSD(starting)} / Night </span>
                 </div>
               </Link>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      ) : null}
     </section>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { RiFacebookBoxLine } from "react-icons/ri";
+
+const FACEBOOK_URL = "https://www.facebook.com";
 const SubContact = () => {
   return (
     <>
@@ -21,9 +22,9 @@ const SubContact = () => {
             <span>House No.123 Sector A-1</span>
           </div>
           <ul>
-          <Link to={"/facebook"} target="_blank"><RiFacebookBoxLine/></Link>
-          <Link to={"/facebook"} target="_blank"><RiFacebookBoxLine/></Link>
-          <Link to={"/facebook"} target="_blank"><RiFacebookBoxLine/></Link>
+          <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" aria-label="Facebook"><RiFacebookBoxLine/></a>
+          <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" aria-label="Facebook"><RiFacebookBoxLine/></a>
+          <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" aria-label="Facebook"><RiFacebookBoxLine/></a>
         </ul>
         </div>
         

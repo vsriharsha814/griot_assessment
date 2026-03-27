@@ -7,6 +7,7 @@ import { BiArea } from "react-icons/bi";
 import { FaBath } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { formatUSD } from '../../utils/currency';
+import { mediaUrl } from '../../utils/media';
 
 const Villas = () => {
   const [apiVillas, setApiVillas] = useState([]);
@@ -42,7 +43,7 @@ const Villas = () => {
       bedrooms: 0,
       bathrooms: 0,
       squareMeter: '-',
-      image: villa.imageUrl ? `http://localhost:5000/${villa.imageUrl}` : '/villa1.jpg',
+      image: mediaUrl(villa.imageUrl) || '/villa1.jpg',
       dailyRent: villa.startingBid ?? 0,
     }));
   }, [apiVillas]);

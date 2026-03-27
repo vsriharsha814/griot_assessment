@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getBidHistory, getProductById, placeBid } from "../../api/products";
 import { useAuth } from "../../context/AuthContext";
 import { formatUSD } from "../../utils/currency";
+import { mediaUrl } from "../../utils/media";
 
 const SingleVilla = () => {
   const { id } = useParams();
@@ -54,7 +55,7 @@ const SingleVilla = () => {
     if (!apiVilla) return null;
     return {
       name: apiVilla.name || "Untitled Villa",
-      image: apiVilla.imageUrl ? `http://localhost:5000/${apiVilla.imageUrl}` : "/villa1.jpg",
+      image: mediaUrl(apiVilla.imageUrl) || "/villa1.jpg",
       location: "Unknown",
       bathrooms: 0,
       guests: 0,

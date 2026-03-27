@@ -38,6 +38,10 @@ Copy `.env.example` to `.env` and update values:
 - `RATE_LIMIT_WINDOW_MS`
 - `RATE_LIMIT_MAX`
 
+## Static assets
+
+Marketing images (`landing.jpg`, `villa*.jpg`, `region*.jpg`, etc.) live under `public/` so Vite serves them at the site root in dev and production. `VITE_API_BASE_URL` is also used to build absolute URLs for uploaded listing images from the API (see `src/utils/media.js`).
+
 ## Local Development
 
 Install dependencies:

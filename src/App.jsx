@@ -12,6 +12,7 @@ import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import SellerInventory from './components/Seller/SellerInventory';
 import ProtectedRoute from './components/ProtectedRoute';
+import NotFound from './components/NotFound';
 import './App.css'
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer/>
       </Router>
