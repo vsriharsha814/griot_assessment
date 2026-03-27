@@ -84,6 +84,10 @@ npm run test:e2e
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for lint/test commands, PR expectations, and tooling alignment with CI.
 
+## Deployment
+
+See [`DEPLOYMENT.md`](DEPLOYMENT.md) for Docker, compose, rollback, and environment rotation guidance.
+
 ## Environments (dev / staging / prod)
 
 - Set **`NODE_ENV`** to `development`, `staging`, or `production` in each environment’s `.env` or host configuration.

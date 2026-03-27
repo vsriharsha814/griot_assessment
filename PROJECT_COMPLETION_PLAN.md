@@ -132,6 +132,7 @@ This plan is based on the current repository state and the intended feature set 
 
 - ✅ Document environment-specific expectations (dev/staging/prod): `README.md`, `.env.example` (`NODE_ENV` and related vars).
 - ✅ Provide deterministic local database via `docker-compose.yml` (MongoDB).
+- ✅ Dockerize backend runtime with deterministic image build (`Dockerfile` + compose `api` service).
 - Deploy stack:
   - frontend host
   - backend host
@@ -140,7 +141,7 @@ This plan is based on the current repository state and the intended feature set 
   - structured logs
   - error tracking
   - uptime checks
-- Document deploy, rollback, and env rotation process.
+- ✅ Document deploy, rollback, and env rotation process (`DEPLOYMENT.md`).
 
 ### Exit Criteria
 
