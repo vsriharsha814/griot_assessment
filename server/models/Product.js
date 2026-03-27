@@ -21,6 +21,10 @@ const productSchema = new mongoose.Schema({
   bidHistory: [bidHistorySchema],
 });
 
+// Indexes for performance and common query patterns.
+productSchema.index({ userId: 1 });
+productSchema.index({ name: "text" });
+
 
 const Product = mongoose.model('Product', productSchema);
 

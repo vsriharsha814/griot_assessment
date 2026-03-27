@@ -98,12 +98,12 @@ This plan is based on the current repository state and the intended feature set 
 
 ## 5) Data and Asset Strategy
 
-- Define dev and production media strategy:
-  - local `uploads/` for development
-  - cloud object storage for production
-- Add seed scripts for local demo/testing.
-- Remove database ambiguity (Mongo vs SQLite); keep one primary path.
-- Document schema assumptions and required indexes.
+- ✅ Define dev and production media strategy:
+  - ✅ local `uploads/` for development
+  - (cloud object storage for production deferred)
+- ✅ Add seed scripts for local demo/testing.
+- ✅ Remove database ambiguity (Mongo vs SQLite); keep one primary path.
+- ✅ Document schema assumptions and required indexes.
 
 ### Exit Criteria
 

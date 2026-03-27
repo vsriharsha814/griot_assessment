@@ -7,14 +7,14 @@ exports.createProduct = async (req, res) => {
     try {
         // const imagePath = req.file.path;
         const { name, description, startingBid, minBidAmount } = req.body;
-        const imagePath = req.file ? req.file.path : null;
+        const imagePath = req.file ? req.file.path : "";
         console.log("request recieved", req.body);
         const newProduct = new Product({
             name,
             description,
             startingBid,
             minBidAmount,
-            imageUrl: imagePath,
+            imageUrl: imagePath || "",
             userId: req.user?._id,
         });
         const savedProduct = await newProduct.save();

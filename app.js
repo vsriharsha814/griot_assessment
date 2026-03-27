@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const http = require('http');
 const socketIO = require('socket.io');
+const fs = require('fs');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const connectDB = require('./server/config/db');
@@ -15,6 +16,11 @@ require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
+
+// Ensure uploads directory exists for multer file writes.
+if (!fs.existsSync('uploads')) {
+    fs.mkdirSync('uploads', { recursive: true });
+}
 
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 const RATE_LIMIT_WINDOW_MS = Number(process.env.RATE_LIMIT_WINDOW_MS || 15 * 60 * 1000);

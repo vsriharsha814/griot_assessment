@@ -68,6 +68,28 @@ Run smoke E2E:
 npm run test:e2e
 ```
 
+## Seed Local Data
+
+To populate MongoDB with a seller, a buyer, and a few example listings:
+
+```bash
+npm run seed
+```
+
+To wipe existing listings for the first seller found and reseed:
+
+```bash
+npm run seed -- --reset
+```
+
+## Schema Notes (MongoDB)
+
+- `Product.userId` links each listing to its seller.
+- Bids are stored in `Product.bidHistory[]` with `bidderName`, `bidAmount`, and `bidTimestamp`.
+- Indexes:
+  - `Product.userId` for seller inventory queries
+  - `Product.name` text index for future search/filtering
+
 ## API Summary
 
 Auth:
