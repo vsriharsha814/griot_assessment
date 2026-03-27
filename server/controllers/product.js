@@ -1,6 +1,6 @@
 // server/controllers/product.js
 const Product = require("../models/Product");
-const { validateBid } = require("../utils/bidValidation");
+const { validateBid, formatBidHistory } = require("../utils/bidValidation");
 const { isOwner } = require("../utils/productOwnership");
 require("dotenv").config();
 exports.createProduct = async (req, res) => {
@@ -95,10 +95,7 @@ exports.getBidHistory = async (req, res) => {
             return res.status(404).json({ message: "Product not found" });
         }
 
-        // Extract bid history from the product
-        const bidHistory = product.bidHistory;
-
-        console.log("bid hisotry", Array.isArray(product.bidHistory));
+        const bidHistory = formatBidHistory(product);
         res.status(200).json(bidHistory);
     } catch (error) {
         console.error("Error fetching bid history:", error);

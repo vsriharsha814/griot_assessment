@@ -4,6 +4,7 @@ const {
   getCurrentHighestBid,
   getMinimumAllowedBid,
   validateBid,
+  formatBidHistory,
 } = require("../utils/bidValidation");
 
 test("getCurrentHighestBid uses startingBid when no history", () => {
@@ -52,4 +53,23 @@ test("validateBid accepts amounts at or above minimum", () => {
   };
   const result = validateBid(product, 170);
   assert.equal(result.isValid, true);
+});
+
+test("formatBidHistory returns sorted bids and summary fields", () => {
+  const product = {
+    _id: "product-1",
+    startingBid: 100,
+    minBidAmount: 20,
+    bidHistory: [
+      { bidderName: "Alice", bidAmount: 120, bidTimestamp: "2026-01-02T00:00:00.000Z" },
+      { bidderName: "Bob", bidAmount: 150, bidTimestamp: "2026-01-03T00:00:00.000Z" },
+    ],
+  };
+
+  const result = formatBidHistory(product);
+  assert.equal(result.productId, "product-1");
+  assert.equal(result.totalBids, 2);
+  assert.equal(result.currentHighestBid, 150);
+  assert.equal(result.minimumNextBid, 170);
+  assert.equal(result.bids[0].bidderName, "Bob");
 });

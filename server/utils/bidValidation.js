@@ -41,8 +41,31 @@ const validateBid = (product, rawBidAmount) => {
   return { isValid: true };
 };
 
+const formatBidHistory = (product) => {
+  const bidHistory = Array.isArray(product?.bidHistory) ? product.bidHistory : [];
+  const bids = [...bidHistory]
+    .map((bid) => ({
+      bidderName: bid.bidderName,
+      bidAmount: toNumber(bid.bidAmount) || 0,
+      bidTimestamp: bid.bidTimestamp,
+    }))
+    .sort((a, b) => new Date(b.bidTimestamp) - new Date(a.bidTimestamp));
+
+  const currentHighestBid = getCurrentHighestBid(product);
+  const minimumNextBid = getMinimumAllowedBid(product);
+
+  return {
+    productId: product?._id,
+    totalBids: bids.length,
+    currentHighestBid,
+    minimumNextBid,
+    bids,
+  };
+};
+
 module.exports = {
   getCurrentHighestBid,
   getMinimumAllowedBid,
   validateBid,
+  formatBidHistory,
 };

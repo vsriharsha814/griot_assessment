@@ -36,3 +36,13 @@ export const deleteProduct = async (productId, token) => {
   });
   return response.data;
 };
+
+export const placeBid = async (productId, payload) => {
+  const response = await apiClient.post(`/products/${productId}/place-bid`, payload);
+  return response.data;
+};
+
+export const getBidHistory = async (productId) => {
+  const response = await apiClient.get(`/products/${productId}/bid-history`);
+  return response.data;
+};

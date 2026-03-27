@@ -63,7 +63,7 @@ This plan is based on the current repository state and the intended feature set 
   - ✅ update/delete listing with ownership checks
 - Bidding:
   - ✅ enforce bid validation rules
-  - return clear bid history
+  - ✅ return clear bid history
 - Auth:
   - ✅ tighten signup/login validation
   - ✅ correct duplicate-user logic and role handling
@@ -88,7 +88,7 @@ This plan is based on the current repository state and the intended feature set 
 - Buyer experience:
   - browse/search listings
   - view listing details
-  - place bid and see bid history
+  - ✅ place bid and see bid history
 - Integrate chat UI only if backend chat is finalized in MVP.
 
 ### Exit Criteria
