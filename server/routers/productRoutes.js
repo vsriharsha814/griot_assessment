@@ -25,6 +25,6 @@ router.post('/:productId/place-bid', productController.placeBid);
 router.get('/:productId/bid-history', productController.getBidHistory);
 
 // router.get('/inventory', productController.getAllProducts);
-router.put('/update/:productId', productController.updateProduct);
+router.put('/update/:productId', authMiddleware, productController.updateProduct);
 
 module.exports = router;

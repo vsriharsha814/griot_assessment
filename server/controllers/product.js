@@ -140,7 +140,7 @@ exports.getInventoryForUser = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
     const { productId } = req.params;
-    const { name, startingBid, minBidAmount } = req.body;
+    const { name, description, startingBid, minBidAmount } = req.body;
 
     try {
         // Find the product by productId
@@ -150,10 +150,15 @@ exports.updateProduct = async (req, res) => {
             return res.status(404).json({ message: "Product not found" });
         }
 
+        if (String(product.userId) !== String(req.user?._id)) {
+            return res.status(403).json({ message: "You can only update your own listings" });
+        }
+
         // Update product details
-        product.name = name;
-        product.startingBid = startingBid;
-        product.minBidAmount = minBidAmount;
+        if (name !== undefined) product.name = name;
+        if (description !== undefined) product.description = description;
+        if (startingBid !== undefined) product.startingBid = startingBid;
+        if (minBidAmount !== undefined) product.minBidAmount = minBidAmount;
 
         // Save the updated product
         await product.save();

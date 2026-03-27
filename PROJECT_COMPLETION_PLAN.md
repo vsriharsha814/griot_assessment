@@ -60,7 +60,7 @@ This plan is based on the current repository state and the intended feature set 
   - create listing
   - list all listings
   - get listing by ID
-  - update/delete listing with ownership checks
+  - ✅ (Partial) update/delete listing with ownership checks
 - Bidding:
   - ✅ enforce bid validation rules
   - return clear bid history
@@ -83,7 +83,7 @@ This plan is based on the current repository state and the intended feature set 
 - ✅ (Partial) Create shared API client + request/error/loading handling.
 - ✅ Implement auth UI + protected routes.
 - Seller experience:
-  - create/update own listings
+  - ✅ create/update own listings
   - ✅ view own inventory
 - Buyer experience:
   - browse/search listings
