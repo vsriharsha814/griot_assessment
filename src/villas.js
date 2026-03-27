@@ -10,7 +10,7 @@ export const villas = [
     squareMeter: "400",
     rating: 4.7,
     image: "/villa1.jpg",
-    dailyRent: "240",
+    dailyRent: 850,
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ export const villas = [
     squareMeter: "450",
     rating: 4.4,
     image: "/villa2.jpg",
-    dailyRent: "300",
+    dailyRent: 1200,
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ export const villas = [
     squareMeter: "500",
     rating: 4.9,
     image: "/villa3.jpg",
-    dailyRent: "200",
+    dailyRent: 980,
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ export const villas = [
     squareMeter: "750",
     rating: 5.0,
     image: "/villa4.jpg",
-    dailyRent: "260",
+    dailyRent: 1750,
   },
   {
     id: 5,
@@ -62,7 +62,7 @@ export const villas = [
     squareMeter: "275",
     rating: 4.0,
     image: "/villa5.jpg",
-    dailyRent: "200",
+    dailyRent: 760,
   },
   {
     id: 6,
@@ -75,7 +75,7 @@ export const villas = [
     squareMeter: "500",
     rating: 4.9,
     image: "/villa6.jpg",
-    dailyRent: "320",
+    dailyRent: 1150,
   },
   {
     id: 7,
@@ -88,7 +88,7 @@ export const villas = [
     squareMeter: "1000",
     rating: 4.8,
     image: "/villa7.jpg",
-    dailyRent: "280",
+    dailyRent: 1450,
   },
   {
     id: 8,
@@ -101,7 +101,7 @@ export const villas = [
     squareMeter: "1500",
     rating: 5.0,
     image: "/villa8.jpg",
-    dailyRent: "400",
+    dailyRent: 2300,
   },
   {
     id: 9,
@@ -114,6 +114,6 @@ export const villas = [
     squareMeter: "240",
     rating: 3.8,
     image: "/villa9.jpg",
-    dailyRent: "180",
+    dailyRent: 640,
   },
 ];

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getSellerInventory } from "../../api/seller";
 import { useAuth } from "../../context/AuthContext";
 import { createProduct, deleteProduct, updateProduct } from "../../api/products";
+import { formatUSD } from "../../utils/currency";
 
 const SellerInventory = () => {
   const { auth } = useAuth();
@@ -174,7 +175,7 @@ const SellerInventory = () => {
               <li key={item._id}>
                 <div>
                   <strong>{item.name}</strong>
-                  <span>Starting Bid: {item.startingBid}</span>
+                  <span>Starting Bid: {formatUSD(item.startingBid)}</span>
                 </div>
                 <button type="button" onClick={() => startEdit(item)}>
                   Edit

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getBidHistory, getProductById, placeBid } from "../../api/products";
 import { useAuth } from "../../context/AuthContext";
+import { formatUSD } from "../../utils/currency";
 
 const SingleVilla = () => {
   const { id } = useParams();
@@ -152,8 +153,8 @@ const SingleVilla = () => {
           </div>
           <div className="bidSection">
             <h4>Bidding</h4>
-            <p>Current Highest Bid: {bidHistory?.currentHighestBid ?? filteredVilla.startingBid ?? 0}</p>
-            <p>Minimum Next Bid: {bidHistory?.minimumNextBid ?? "-"}</p>
+            <p>Current Highest Bid: {formatUSD(bidHistory?.currentHighestBid ?? filteredVilla.startingBid ?? 0)}</p>
+            <p>Minimum Next Bid: {bidHistory?.minimumNextBid ? formatUSD(bidHistory.minimumNextBid) : "-"}</p>
             <form className="bidForm" onSubmit={onBidSubmit}>
               <input
                 name="bidderName"
@@ -183,7 +184,7 @@ const SingleVilla = () => {
                   {bidHistory.bids.map((bid, index) => (
                     <li key={`${bid.bidderName}-${bid.bidTimestamp}-${index}`}>
                       <span>{bid.bidderName}</span>
-                      <span>{bid.bidAmount}</span>
+                      <span>{formatUSD(bid.bidAmount)}</span>
                       <span>{new Date(bid.bidTimestamp).toLocaleString()}</span>
                     </li>
                   ))}

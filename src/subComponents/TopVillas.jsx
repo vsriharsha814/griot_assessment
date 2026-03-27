@@ -6,6 +6,7 @@ import { FaBed } from "react-icons/fa";
 import { BiArea } from "react-icons/bi";
 import { FaBath } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { formatUSD } from "../utils/currency";
 
 const TopVillas = () => {
   return (
@@ -53,7 +54,7 @@ const TopVillas = () => {
                   </div>
                 </div>
                 <div className="badge">
-                  From <span>Rs.{element.dailyRent} / Day </span>
+                  From <span>{formatUSD(element.dailyRent)} / Day </span>
                 </div>
               </Link>
           );
