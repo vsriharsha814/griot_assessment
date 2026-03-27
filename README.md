@@ -120,6 +120,11 @@ npm run seed -- --reset
 
 ## API Summary
 
+Health (no auth; for monitors and load balancers):
+
+- `GET /health` — liveness (process up)
+- `GET /health/ready` — readiness (MongoDB connected)
+
 Auth:
 - `POST /api/auth/signup`
 - `POST /api/auth/login`

@@ -133,14 +133,11 @@ This plan is based on the current repository state and the intended feature set 
 - ✅ Document environment-specific expectations (dev/staging/prod): `README.md`, `.env.example` (`NODE_ENV` and related vars).
 - ✅ Provide deterministic local database via `docker-compose.yml` (MongoDB).
 - ✅ Dockerize backend runtime with deterministic image build (`Dockerfile` + compose `api` service).
-- Deploy stack:
-  - frontend host
-  - backend host
-  - managed MongoDB
-- Add observability:
-  - structured logs
-  - error tracking
-  - uptime checks
+- ✅ Document deploy stack options (frontend / backend / MongoDB) in `DEPLOYMENT.md`.
+- ✅ Add observability baseline:
+  - ✅ structured logs (production JSON request lines + fatal process errors)
+  - (optional) vendor error tracking (Sentry etc. — documented, not bundled)
+  - ✅ uptime-oriented health endpoints (`GET /health`, `GET /health/ready`)
 - ✅ Document deploy, rollback, and env rotation process (`DEPLOYMENT.md`).
 
 ### Exit Criteria

@@ -44,17 +44,53 @@ docker compose down
 
 For production, point backend `MONGODB_URI` to managed MongoDB instead of local compose Mongo.
 
-## 4) Rollback playbook
+### Stack (concrete options)
+
+| Layer | Examples |
+|--------|----------|
+| Frontend (static) | Netlify, Vercel, Cloudflare Pages, S3 + CloudFront |
+| Backend (container) | Render, Railway, Fly.io, AWS ECS/Fargate, Google Cloud Run |
+| MongoDB | MongoDB Atlas (recommended), or self-hosted with backups |
+
+## 4) Health and uptime checks
+
+Use these for load balancers and external monitors (no auth):
+
+| Endpoint | Purpose |
+|----------|---------|
+| `GET /health` | **Liveness** — process is running (`200` JSON with `status`, `uptimeSeconds`). |
+| `GET /health/ready` | **Readiness** — MongoDB is connected (`200`); returns `503` if DB is not ready. |
+
+Example:
+
+```bash
+curl -s http://localhost:5000/health
+curl -s http://localhost:5000/health/ready
+```
+
+**Note:** In production, point uptime monitors at your public API host (e.g. `https://api.example.com/health`).
+
+### Logs
+
+- In **`NODE_ENV=production`**, each HTTP request is logged as one JSON line (`method`, `path`, `status`, `ms`); `/health` paths are not logged to reduce noise.
+- Unhandled promise rejections and uncaught exceptions are logged as JSON in production.
+
+### Error tracking (optional)
+
+Wire a third-party service (e.g. Sentry) in your host or add a small SDK in `app.js` if you need stack traces in a dashboard. The repo does not ship a vendor SDK by default.
+
+## 5) Rollback playbook
 
 If a deploy fails:
 
 1. Roll back to previous container image tag in your backend host.
-2. Confirm API health endpoint/critical route (`GET /api/products/getAll`).
-3. Verify auth flow (`/api/auth/login`) and listing read path.
-4. Re-point frontend to the previous API URL if a backend rollback changed domains.
-5. Log incident details and root cause before redeploying.
+2. Confirm `GET /health` and `GET /health/ready` return `200`.
+3. Spot-check a critical route (`GET /api/products/getAll`).
+4. Verify auth flow (`POST /api/auth/login`) and listing read path.
+5. Re-point frontend to the previous API URL if a backend rollback changed domains.
+6. Log incident details and root cause before redeploying.
 
-## 5) Environment variable rotation
+## 6) Environment variable rotation
 
 Rotate secrets without downtime:
 
@@ -68,8 +104,8 @@ Minimum vars to rotate and protect:
 - `MONGODB_URI` credentials
 - any future API keys/tokens
 
-## 6) Basic observability checklist
+## 7) Basic observability checklist
 
-- Structured JSON logs from backend host
-- Error tracking integration (Sentry or equivalent)
-- Uptime monitor on API base URL and critical route checks
+- Structured JSON logs from backend host (enabled in production for HTTP + fatal process errors)
+- Optional error tracking integration (Sentry or equivalent)
+- Uptime monitor on `GET /health` or `GET /health/ready` plus critical route checks

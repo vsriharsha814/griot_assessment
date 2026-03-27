@@ -7,15 +7,39 @@ const fs = require('fs');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const connectDB = require('./server/config/db');
+const healthRoutes = require('./server/routers/healthRoutes');
 const productRoutes = require('./server/routers/productRoutes');
 const authRoutes = require('./server/routers/authRoutes');
 const sellerRoutes = require('./server/routers/sellerRoutes');
+const requestLogger = require('./server/middleware/requestLogger');
 const { notFoundHandler, errorHandler } = require('./server/middleware/errorHandler');
 
 require('dotenv').config();
 
+if (process.env.NODE_ENV === 'production') {
+  process.on('unhandledRejection', (reason) => {
+    console.error(JSON.stringify({
+      ts: new Date().toISOString(),
+      event: 'unhandledRejection',
+      reason: reason instanceof Error ? reason.message : String(reason),
+    }));
+  });
+  process.on('uncaughtException', (err) => {
+    console.error(JSON.stringify({
+      ts: new Date().toISOString(),
+      event: 'uncaughtException',
+      message: err.message,
+      stack: err.stack,
+    }));
+    process.exit(1);
+  });
+}
+
 const app = express();
 const server = http.createServer(app);
+
+// Liveness/readiness before rate limiting (monitoring probes).
+app.use('/health', healthRoutes);
 
 // Ensure uploads directory exists for multer file writes.
 if (!fs.existsSync('uploads')) {
@@ -57,6 +81,8 @@ app.use(limiter);
 app.use(express.json({ limit: '1mb' }));
 
 app.use(cors(corsOptions));
+
+app.use(requestLogger);
 
 // Serve static files from the 'uploads' directory
 app.use('/uploads', express.static('uploads'));
