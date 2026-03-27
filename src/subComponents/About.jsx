@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
+  const navigate = useNavigate();
   return (
     <>
       <section id="aboutUs_Mini">
@@ -20,7 +22,13 @@ const About = () => {
             Feedback welcome—we are iterating fast and your notes help us prioritize what to build next.
           </p>
           </div>
-          <button type="button">We strive to offer you best possible homes to stay!</button>
+          <button
+            type="button"
+            onClick={() => navigate("/villas")}
+            aria-label="Browse all properties"
+          >
+            We strive to offer you best possible homes to stay!
+          </button>
         </div>
         <div className="second_container">
           <div className="image_1">
