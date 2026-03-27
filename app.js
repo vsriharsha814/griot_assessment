@@ -33,11 +33,22 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 
+const isAllowedDevOrigin = (origin) =>
+  /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+
 const corsOptions = {
-    origin: CLIENT_URL,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-    optionsSuccessStatus: 204,
+  origin: (origin, callback) => {
+    // Allow non-browser requests (curl, server-to-server).
+    if (!origin) return callback(null, true);
+    if (origin === CLIENT_URL) return callback(null, true);
+    if (process.env.NODE_ENV !== 'production' && isAllowedDevOrigin(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
 };
 
 // Middleware
@@ -59,10 +70,13 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 const io = socketIO(server, {
-    cors: {
-        origin: CLIENT_URL,
-        methods: ['GET', 'POST'],
-    },
+  cors: {
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? CLIENT_URL
+        : [CLIENT_URL, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+    methods: ['GET', 'POST'],
+  },
 });
 
 

@@ -19,7 +19,7 @@ const productSchema = new mongoose.Schema({
   // Add more fields as needed
 
   bidHistory: [bidHistorySchema],
-});
+}, { timestamps: true });
 
 // Indexes for performance and common query patterns.
 productSchema.index({ userId: 1 });

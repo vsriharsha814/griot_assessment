@@ -17,6 +17,27 @@ const mapFallbackVilla = (villa) => ({
   startingBid: villa.dailyRent,
 });
 
+const getAddedLabel = (createdAt) => {
+  if (!createdAt) return "Sample listing";
+  const createdMs = new Date(createdAt).getTime();
+  if (Number.isNaN(createdMs)) return "Recently added";
+  const diffMs = Date.now() - createdMs;
+  const diffMinutes = Math.floor(diffMs / (1000 * 60));
+  if (diffMinutes < 1) return "Added just now";
+  if (diffMinutes < 60) return `Added ${diffMinutes}m ago`;
+  const diffHours = Math.floor(diffMinutes / 60);
+  if (diffHours < 24) return `Added ${diffHours}h ago`;
+  const diffDays = Math.floor(diffHours / 24);
+  if (diffDays >= 7) {
+    return `Added on ${new Date(createdMs).toLocaleDateString(undefined, {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    })}`;
+  }
+  return `Added ${diffDays}d ago`;
+};
+
 const TopVillas = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -68,6 +89,7 @@ const TopVillas = () => {
             const imageSrc = mediaUrl(product.imageUrl) || "/villa1.jpg";
             const title = product.name || "Listing";
             const starting = product.startingBid ?? 0;
+            const addedLabel = getAddedLabel(product.createdAt);
             return (
               <Link to={isFallback ? "/villas" : `/villa/${id}`} className="card" key={id}>
                 <img src={imageSrc} alt={title} />
@@ -76,7 +98,7 @@ const TopVillas = () => {
                   <span>
                     <RxDot />
                   </span>
-                  <span>Property</span>
+                  <span>{addedLabel}</span>
                 </div>
                 <div className="title_text">{title}</div>
                 <div className="specifications">

@@ -30,7 +30,7 @@ exports.createProduct = async (req, res) => {
 
 exports.getAllProducts = async (req, res) => {
     try {
-        const products = await Product.find();
+        const products = await Product.find().sort({ createdAt: -1, _id: -1 });
         res.json(products);
     } catch (error) {
         console.error("Error fetching products:", error);
