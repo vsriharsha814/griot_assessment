@@ -24,7 +24,7 @@ Not implemented yet:
 - Frontend: React, React Router, Axios, Vite
 - Backend: Node.js, Express, Mongoose, JWT, Socket.IO
 - Database: MongoDB
-- Testing: Node built-in test runner (`node --test`)
+- Testing: Node built-in test runner (`node --test`), Vitest + Testing Library, Playwright
 
 ## Environment Variables
 
@@ -44,11 +44,23 @@ Marketing images (`landing.jpg`, `villa*.jpg`, `region*.jpg`, etc.) live under `
 
 ## Local Development
 
+**Node.js:** use **v20 or newer** (matches CI; see `engines` in `package.json`).
+
 Install dependencies:
 
 ```bash
 npm install
 ```
+
+### MongoDB via Docker (optional)
+
+If you do not have MongoDB installed locally:
+
+```bash
+docker compose up -d
+```
+
+Keep `MONGODB_URI=mongodb://127.0.0.1:27017/property-rent-sale` in `.env` so the app points at the container.
 
 Run backend + frontend in parallel:
 
@@ -67,6 +79,18 @@ Run smoke E2E:
 ```bash
 npm run test:e2e
 ```
+
+## Contributing
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for lint/test commands, PR expectations, and tooling alignment with CI.
+
+## Environments (dev / staging / prod)
+
+- Set **`NODE_ENV`** to `development`, `staging`, or `production` in each environment’s `.env` or host configuration.
+- **`CLIENT_URL`** must be the exact browser origin of the React app (used for CORS and Socket.IO). Example staging: `https://app-staging.example.com`.
+- **`MONGODB_URI`** should point at a dedicated database per environment; do not share production data with dev.
+- **`JWT_SECRET`** must be long, random, and unique per environment; rotate if compromised.
+- **`VITE_API_BASE_URL`** is baked in at frontend build time—set it to the correct API base URL for that build (e.g. `https://api.example.com/api` for production).
 
 ## Seed Local Data
 

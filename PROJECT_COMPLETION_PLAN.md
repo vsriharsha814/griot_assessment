@@ -130,8 +130,8 @@ This plan is based on the current repository state and the intended feature set 
 
 ## 7) Deployment and Operations
 
-- Add environment-specific configs (dev/staging/prod).
-- Dockerize or provide deterministic deployment scripts.
+- ✅ Document environment-specific expectations (dev/staging/prod): `README.md`, `.env.example` (`NODE_ENV` and related vars).
+- ✅ Provide deterministic local database via `docker-compose.yml` (MongoDB).
 - Deploy stack:
   - frontend host
   - backend host
@@ -155,7 +155,7 @@ This plan is based on the current repository state and the intended feature set 
   - environment variable reference
   - API summary
   - roadmap and deferred features
-- Add contribution standards aligned with repo tooling.
+- ✅ Add contribution standards aligned with repo tooling (`CONTRIBUTING.md`).
 
 ### Exit Criteria
 
