@@ -1,6 +1,7 @@
 // server/controllers/product.js
 const Product = require("../models/Product");
 const { validateBid } = require("../utils/bidValidation");
+const { isOwner } = require("../utils/productOwnership");
 require("dotenv").config();
 exports.createProduct = async (req, res) => {
     try {
@@ -150,7 +151,7 @@ exports.updateProduct = async (req, res) => {
             return res.status(404).json({ message: "Product not found" });
         }
 
-        if (String(product.userId) !== String(req.user?._id)) {
+        if (!isOwner(product.userId, req.user?._id)) {
             return res.status(403).json({ message: "You can only update your own listings" });
         }
 
@@ -170,5 +171,27 @@ exports.updateProduct = async (req, res) => {
     } catch (error) {
         console.error("Error updating product:", error);
         res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+exports.deleteProduct = async (req, res) => {
+    const { productId } = req.params;
+
+    try {
+        const product = await Product.findById(productId);
+
+        if (!product) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        if (!isOwner(product.userId, req.user?._id)) {
+            return res.status(403).json({ message: "You can only delete your own listings" });
+        }
+
+        await product.deleteOne();
+        return res.status(200).json({ message: "Product deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting product:", error);
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 };

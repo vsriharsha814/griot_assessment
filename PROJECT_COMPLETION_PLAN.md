@@ -60,7 +60,7 @@ This plan is based on the current repository state and the intended feature set 
   - create listing
   - list all listings
   - get listing by ID
-  - ✅ (Partial) update/delete listing with ownership checks
+  - ✅ update/delete listing with ownership checks
 - Bidding:
   - ✅ enforce bid validation rules
   - return clear bid history

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getSellerInventory } from "../../api/seller";
 import { useAuth } from "../../context/AuthContext";
-import { createProduct, updateProduct } from "../../api/products";
+import { createProduct, deleteProduct, updateProduct } from "../../api/products";
 
 const SellerInventory = () => {
   const { auth } = useAuth();
@@ -110,6 +110,27 @@ const SellerInventory = () => {
     }
   };
 
+  const onDelete = async (productId) => {
+    const approved = window.confirm("Delete this listing?");
+    if (!approved) return;
+
+    setSubmitting(true);
+    setMessage("");
+    setError("");
+    try {
+      await deleteProduct(productId, auth.token);
+      if (editingId === productId) {
+        setEditingId(null);
+      }
+      setMessage("Listing deleted.");
+      await loadInventory();
+    } catch (err) {
+      setError(err.response?.data?.message || err.response?.data?.error || "Failed to delete listing");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <section className="page authPage">
       <div className="authCard inventoryCard">
@@ -157,6 +178,9 @@ const SellerInventory = () => {
                 </div>
                 <button type="button" onClick={() => startEdit(item)}>
                   Edit
+                </button>
+                <button type="button" onClick={() => onDelete(item._id)} disabled={submitting}>
+                  Delete
                 </button>
               </li>
             ))}

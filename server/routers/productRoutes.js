@@ -26,5 +26,6 @@ router.get('/:productId/bid-history', productController.getBidHistory);
 
 // router.get('/inventory', productController.getAllProducts);
 router.put('/update/:productId', authMiddleware, productController.updateProduct);
+router.delete('/delete/:productId', authMiddleware, productController.deleteProduct);
 
 module.exports = router;

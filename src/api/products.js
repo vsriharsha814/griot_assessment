@@ -27,3 +27,12 @@ export const updateProduct = async (productId, payload, token) => {
   });
   return response.data;
 };
+
+export const deleteProduct = async (productId, token) => {
+  const response = await apiClient.delete(`/products/delete/${productId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
