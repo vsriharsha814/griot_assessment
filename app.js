@@ -3,29 +3,43 @@ const express = require('express');
 const cors = require('cors');
 const http = require('http');
 const socketIO = require('socket.io');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const connectDB = require('./server/config/db');
 const productRoutes = require('./server/routers/productRoutes');
 const authRoutes = require('./server/routers/authRoutes');
 const sellerRoutes = require('./server/routers/sellerRoutes');
+const { notFoundHandler, errorHandler } = require('./server/middleware/errorHandler');
 
 require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
 
+const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
+const RATE_LIMIT_WINDOW_MS = Number(process.env.RATE_LIMIT_WINDOW_MS || 15 * 60 * 1000);
+const RATE_LIMIT_MAX = Number(process.env.RATE_LIMIT_MAX || 300);
+
+const limiter = rateLimit({
+  windowMs: RATE_LIMIT_WINDOW_MS,
+  max: RATE_LIMIT_MAX,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 const corsOptions = {
-    origin: 'http://localhost:3000', // Replace with your frontend's URL
+    origin: CLIENT_URL,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // Enable credentials (cookies, HTTP authentication) cross-origin
-    optionsSuccessStatus: 204, // Respond with a 204 status for preflight requests
+    credentials: true,
+    optionsSuccessStatus: 204,
 };
 
 // Middleware
-app.use(express.json());
+app.use(helmet());
+app.use(limiter);
+app.use(express.json({ limit: '1mb' }));
 
-//use cors
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
 
 // Serve static files from the 'uploads' directory
 app.use('/uploads', express.static('uploads'));
@@ -34,11 +48,13 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/seller', sellerRoutes);
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 const io = socketIO(server, {
     cors: {
-        origin: 'http://localhost:3000',
+        origin: CLIENT_URL,
         methods: ['GET', 'POST'],
     },
 });

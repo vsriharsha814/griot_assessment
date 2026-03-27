@@ -17,18 +17,18 @@ This plan is based on the current repository state and the intended feature set 
 ## 1) Security and Reliability First
 
 - ✅ Remove dynamic remote code execution in `server/controllers/product.js`.
-- Audit and remove unnecessary/suspicious dependencies where safe.
+- ✅ Audit and remove unnecessary/suspicious dependencies where safe.
 - ✅ Add `.env.example`:
   - `PORT`
   - `JWT_SECRET`
   - `MONGODB_URI`
   - `CLIENT_URL`
-- Harden API defaults:
-  - `helmet`
-  - strict CORS from env
-  - payload limits
-  - basic rate limiting
-- Add pre-commit/CI checks for lint + tests.
+- ✅ Harden API defaults:
+  - ✅ `helmet`
+  - ✅ strict CORS from env
+  - ✅ payload limits
+  - ✅ basic rate limiting
+- ✅ (Partial) Add pre-commit/CI checks for lint + tests.
 
 ### Exit Criteria
 
@@ -46,7 +46,7 @@ This plan is based on the current repository state and the intended feature set 
   - socket auth middleware for Socket.IO only
 - ✅ Align schema/controller fields:
   - `Product.userId` vs `user` mismatch
-- Add centralized error handling and consistent JSON error shape.
+- ✅ Add centralized error handling and consistent JSON error shape.
 
 ### Exit Criteria
 
@@ -62,14 +62,14 @@ This plan is based on the current repository state and the intended feature set 
   - get listing by ID
   - update/delete listing with ownership checks
 - Bidding:
-  - enforce bid validation rules
+  - ✅ enforce bid validation rules
   - return clear bid history
 - Auth:
   - tighten signup/login validation
   - correct duplicate-user logic and role handling
 - Chat:
   - either fully wire routes + storage + socket flow, or defer cleanly
-- Add API docs (OpenAPI or markdown endpoint table).
+- ✅ Add API docs (OpenAPI or markdown endpoint table).
 
 ### Exit Criteria
 
@@ -120,7 +120,7 @@ This plan is based on the current repository state and the intended feature set 
   - route rendering
   - data-loading states
   - protected route behavior
-- Add CI to run lint + tests on every PR.
+- ✅ (Partial) Add CI to run lint + tests on every PR.
 - Add one smoke E2E flow for critical user journey.
 
 ### Exit Criteria
@@ -149,8 +149,8 @@ This plan is based on the current repository state and the intended feature set 
 
 ## 8) Documentation Parity
 
-- Rewrite `README.md` to reflect actual architecture and setup.
-- Add:
+- ✅ Rewrite `README.md` to reflect actual architecture and setup.
+- ✅ Add:
   - local setup instructions
   - environment variable reference
   - API summary
