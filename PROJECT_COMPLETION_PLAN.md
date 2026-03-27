@@ -86,8 +86,8 @@ This plan is based on the current repository state and the intended feature set 
   - ✅ create/update own listings
   - ✅ view own inventory
 - Buyer experience:
-  - browse/search listings
-  - view listing details
+  - ✅ browse/search listings
+  - ✅ view listing details
   - ✅ place bid and see bid history
 - Integrate chat UI only if backend chat is finalized in MVP.
 

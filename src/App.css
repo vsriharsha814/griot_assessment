@@ -946,6 +946,16 @@ h5 {
   margin: 0 auto;
   max-width: 1500px;
 }
+.villaFilters {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0 20px 0;
+}
+.villaFilters input {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
 
 /**********************SINGLE VILLA PAGE STYLING ***************************************/
 #singleVilla {

@@ -11,6 +11,8 @@ const Villas = () => {
   const [apiVillas, setApiVillas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [maxDailyRent, setMaxDailyRent] = useState('');
 
   useEffect(() => {
     const fetchVillas = async () => {
@@ -44,15 +46,45 @@ const Villas = () => {
     }));
   }, [apiVillas]);
 
+  const filteredVillas = useMemo(() => {
+    const normalizedSearch = searchTerm.trim().toLowerCase();
+    const maxRent = maxDailyRent ? Number(maxDailyRent) : null;
+
+    return villas.filter((villa) => {
+      const matchesSearch =
+        !normalizedSearch ||
+        villa.name.toLowerCase().includes(normalizedSearch) ||
+        villa.category.toLowerCase().includes(normalizedSearch);
+      const matchesRent = maxRent === null || Number(villa.dailyRent) <= maxRent;
+      return matchesSearch && matchesRent;
+    });
+  }, [villas, searchTerm, maxDailyRent]);
+
   return (
     <>
         <div className="page" id='allVillas'>
           <h1>ALL VILLAS</h1>
           {loading && <p>Loading properties...</p>}
           {!loading && loadError && <p>{loadError}</p>}
-          {!loading && !loadError && <p>{villas.length} Properties</p>}
+          {!loading && !loadError ? (
+            <div className="villaFilters">
+              <input
+                type="text"
+                placeholder="Search by name"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+              />
+              <input
+                type="number"
+                placeholder="Max rent"
+                value={maxDailyRent}
+                onChange={(event) => setMaxDailyRent(event.target.value)}
+              />
+            </div>
+          ) : null}
+          {!loading && !loadError && <p>{filteredVillas.length} Properties</p>}
           <div className="villasContainer">
-        {villas.map((element) => {
+        {filteredVillas.map((element) => {
           return (
               <Link to={`/villa/${element.id}`} className="card" key={element.id}>
                 <img src={element.image} alt={element.name} />
@@ -93,6 +125,7 @@ const Villas = () => {
           );
         })}
       </div>
+      {!loading && !loadError && filteredVillas.length === 0 ? <p>No matching properties found.</p> : null}
         </div>
     </>
   )
