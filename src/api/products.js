@@ -1,8 +1,15 @@
 import apiClient from "./client";
 
+const normalizeProductsResponse = (payload) => {
+  if (Array.isArray(payload)) return payload;
+  if (Array.isArray(payload?.products)) return payload.products;
+  if (Array.isArray(payload?.data)) return payload.data;
+  return [];
+};
+
 export const getAllProducts = async () => {
   const response = await apiClient.get("/products/getAll");
-  return response.data;
+  return normalizeProductsResponse(response.data);
 };
 
 export const getProductById = async (productId) => {

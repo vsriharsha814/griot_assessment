@@ -8,6 +8,14 @@ import { Link } from "react-router-dom";
 import { formatUSD } from "../utils/currency";
 import { mediaUrl } from "../utils/media";
 import { getAllProducts } from "../api/products";
+import { villas as fallbackVillas } from "../villas";
+
+const mapFallbackVilla = (villa) => ({
+  _id: `fallback-${villa.id}`,
+  name: villa.name,
+  imageUrl: villa.image,
+  startingBid: villa.dailyRent,
+});
 
 const TopVillas = () => {
   const [items, setItems] = useState([]);
@@ -25,8 +33,8 @@ const TopVillas = () => {
         }
       } catch {
         if (!cancelled) {
-          setError("Could not load featured listings.");
-          setItems([]);
+          setError("Could not load featured listings. Showing sample properties instead.");
+          setItems(fallbackVillas.slice(0, 3).map(mapFallbackVilla));
         }
       } finally {
         if (!cancelled) setLoading(false);
@@ -55,12 +63,13 @@ const TopVillas = () => {
       {!loading && items.length > 0 ? (
         <div className="villasContainer">
           {items.map((product) => {
-            const id = product._id;
+            const id = product._id || product.id;
+            const isFallback = typeof id === "string" && id.startsWith("fallback-");
             const imageSrc = mediaUrl(product.imageUrl) || "/villa1.jpg";
             const title = product.name || "Listing";
             const starting = product.startingBid ?? 0;
             return (
-              <Link to={`/villa/${id}`} className="card" key={id}>
+              <Link to={isFallback ? "/villas" : `/villa/${id}`} className="card" key={id}>
                 <img src={imageSrc} alt={title} />
                 <div className="location_text">
                   <span>Featured</span>
