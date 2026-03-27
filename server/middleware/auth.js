@@ -1,19 +1,37 @@
-// server/middleware/authMiddleware.js
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
+const authenticateToken = (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization || '';
+    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res.status(401).json({ error: 'Access token required' });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = {
+      _id: decoded.userId,
+      role: decoded.role,
+    };
+
+    return next();
+  } catch (error) {
+    return res.status(401).json({ error: 'Invalid or expired token' });
+  }
+};
+
 const authenticateSocket = async (socket, next) => {
   try {
-    //   console.log('Socket handshake.auth:', socket.handshake.auth);
-      const token = socket.handshake.auth.token;
+    const token = socket.handshake.auth.token;
 
     if (!token) {
       throw new Error('Token not provided');
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('token is ', decoded)
-    const user = await User.findOne({ _id: decoded._id, 'tokens.token': token });
+    const user = await User.findById(decoded.userId);
 
     if (!user) {
       throw new Error('User not found');
@@ -27,12 +45,10 @@ const authenticateSocket = async (socket, next) => {
     if (error.name === 'JsonWebTokenError') {
       return next(new Error('Invalid token'));
     }
-    if (error.message === 'User does not have access to inventory') {
-      return next(new Error('Unauthorized access to inventory'));
-    }
-
-    // next(new Error('Authentication failed'));
+    return next(new Error('Authentication failed'));
   }
 };
 
-module.exports = { authenticateSocket };
+module.exports = authenticateToken;
+module.exports.authenticateToken = authenticateToken;
+module.exports.authenticateSocket = authenticateSocket;

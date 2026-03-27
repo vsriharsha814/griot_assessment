@@ -19,6 +19,7 @@ const upload = multer({ storage: storage });
 router.post('/create', upload.single('image'), productController.createProduct);
 
 router.get('/getAll', productController.getAllProducts);
+router.get('/:productId', productController.getProductById);
 
 router.post('/:productId/place-bid', productController.placeBid);
 router.get('/:productId/bid-history', productController.getBidHistory);

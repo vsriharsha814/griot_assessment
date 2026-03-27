@@ -6,7 +6,7 @@ exports.getSellerInventory = async (req, res) => {
     const userId = req.user._id;
 
     // Fetch products for the specific seller
-    const inventory = await Product.find({ user: userId });
+    const inventory = await Product.find({ userId });
 
     res.json(inventory);
   } catch (error) {

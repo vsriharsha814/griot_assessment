@@ -1,10 +1,62 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import { villas } from "../../villas";
+import axios from "axios";
+
 const SingleVilla = () => {
   const { id } = useParams();
-  const numericId = Number(id);
-  const filteredVilla = villas.filter((villa) => villa.id === numericId)[0];
+  const [apiVilla, setApiVilla] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
+
+  useEffect(() => {
+    const fetchVilla = async () => {
+      try {
+        setLoadError("");
+        const response = await axios.get(`http://localhost:5000/api/products/${id}`);
+        setApiVilla(response.data || null);
+      } catch (error) {
+        console.error("Error loading villa details from API:", error);
+        setLoadError("Unable to load property details.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVilla();
+  }, [id]);
+
+  const filteredVilla = useMemo(() => {
+    if (!apiVilla) return null;
+    return {
+      name: apiVilla.name || "Untitled Villa",
+      image: apiVilla.imageUrl ? `http://localhost:5000/${apiVilla.imageUrl}` : "/villa1.jpg",
+      location: "Unknown",
+      bathrooms: 0,
+      guests: 0,
+      squareMeter: "-",
+    };
+  }, [apiVilla]);
+
+  if (loading) {
+    return (
+      <section id="singleVilla" className="page">
+        <div className="container">
+          <h3>Loading property...</h3>
+        </div>
+      </section>
+    );
+  }
+
+  if (!filteredVilla) {
+    return (
+      <section id="singleVilla" className="page">
+        <div className="container">
+          <h3>{loadError || "Villa not found"}</h3>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <>
       <section id="singleVilla" className="page">

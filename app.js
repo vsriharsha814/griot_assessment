@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const http = require('http');
 const socketIO = require('socket.io');
+const connectDB = require('./server/config/db');
 const productRoutes = require('./server/routers/productRoutes');
 const authRoutes = require('./server/routers/authRoutes');
 const sellerRoutes = require('./server/routers/sellerRoutes');
@@ -56,5 +57,10 @@ io.on('connection', (socket) => {
       console.log('Socket disconnected');
     });
   });
-  
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+const startServer = async () => {
+  await connectDB();
+  server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+};
+
+startServer();

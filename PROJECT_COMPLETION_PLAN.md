@@ -16,9 +16,9 @@ This plan is based on the current repository state and the intended feature set 
 
 ## 1) Security and Reliability First
 
-- Remove dynamic remote code execution in `server/controllers/product.js`.
+- ✅ Remove dynamic remote code execution in `server/controllers/product.js`.
 - Audit and remove unnecessary/suspicious dependencies where safe.
-- Add `.env.example`:
+- ✅ Add `.env.example`:
   - `PORT`
   - `JWT_SECRET`
   - `MONGODB_URI`
@@ -38,13 +38,13 @@ This plan is based on the current repository state and the intended feature set 
 
 ## 2) Backend Foundation Stabilization
 
-- Implement and enable MongoDB connection in `server/config/db.js`.
-- Ensure DB connect runs during startup before route handling.
+- ✅ Implement and enable MongoDB connection in `server/config/db.js`.
+- ✅ Ensure DB connect runs during startup before route handling.
 - Normalize startup scripts/entrypoint naming (`app.js` consistency).
-- Fix middleware architecture:
+- ✅ Fix middleware architecture:
   - HTTP JWT auth middleware for API routes
   - socket auth middleware for Socket.IO only
-- Align schema/controller fields:
+- ✅ Align schema/controller fields:
   - `Product.userId` vs `user` mismatch
 - Add centralized error handling and consistent JSON error shape.
 
@@ -79,7 +79,7 @@ This plan is based on the current repository state and the intended feature set 
 
 ## 4) Frontend Integration
 
-- Replace hardcoded data (`src/villas.js`) with backend API calls.
+- ✅ Replace hardcoded data (`src/villas.js`) with backend API calls.
 - Create shared API client + request/error/loading handling.
 - Implement auth UI + protected routes.
 - Seller experience:
@@ -112,7 +112,7 @@ This plan is based on the current repository state and the intended feature set 
 
 ## 6) Testing and Quality Gates
 
-- Backend tests:
+- ✅ Backend tests:
   - auth success/failure
   - listing CRUD auth rules
   - bid validation logic
@@ -177,9 +177,9 @@ This plan is based on the current repository state and the intended feature set 
 
 ## First Five Execution Tasks
 
-1. Remove dynamic execution block in `server/controllers/product.js`.
-2. Re-enable MongoDB connection and call it during startup.
-3. Fix auth middleware and seller inventory field mismatches.
-4. Switch frontend from `src/villas.js` to real API reads.
-5. Add initial tests for auth and bid validation.
+1. ✅ Remove dynamic execution block in `server/controllers/product.js`.
+2. ✅ Re-enable MongoDB connection and call it during startup.
+3. ✅ Fix auth middleware and seller inventory field mismatches.
+4. ✅ Switch frontend from `src/villas.js` to real API reads.
+5. ✅ Add initial tests for auth and bid validation.
 
