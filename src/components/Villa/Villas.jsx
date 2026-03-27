@@ -120,7 +120,7 @@ const Villas = () => {
                   </div>
                 </div>
                 <div className="badge">
-                  From <span>{formatUSD(element.dailyRent)} / Day </span>
+                  From <span>{formatUSD(element.dailyRent)} / Night </span>
                 </div>
               </Link>
           );
