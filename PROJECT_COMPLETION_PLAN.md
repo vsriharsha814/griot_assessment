@@ -40,7 +40,7 @@ This plan is based on the current repository state and the intended feature set 
 
 - ✅ Implement and enable MongoDB connection in `server/config/db.js`.
 - ✅ Ensure DB connect runs during startup before route handling.
-- Normalize startup scripts/entrypoint naming (`app.js` consistency).
+- ✅ Normalize startup scripts/entrypoint naming (`app.js` consistency).
 - ✅ Fix middleware architecture:
   - HTTP JWT auth middleware for API routes
   - socket auth middleware for Socket.IO only
@@ -81,10 +81,10 @@ This plan is based on the current repository state and the intended feature set 
 
 - ✅ Replace hardcoded data (`src/villas.js`) with backend API calls.
 - ✅ (Partial) Create shared API client + request/error/loading handling.
-- Implement auth UI + protected routes.
+- ✅ Implement auth UI + protected routes.
 - Seller experience:
   - create/update own listings
-  - view own inventory
+  - ✅ view own inventory
 - Buyer experience:
   - browse/search listings
   - view listing details

@@ -14,7 +14,7 @@ exports.createProduct = async (req, res) => {
             startingBid,
             minBidAmount,
             imageUrl: imagePath,
-            // userId: req.user.email,
+            userId: req.user?._id,
         });
         const savedProduct = await newProduct.save();
         console.log("Product saved successfully"); // Log success

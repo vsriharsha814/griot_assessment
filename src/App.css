@@ -1168,3 +1168,61 @@ h5 {
     width: 100%;
   }
 }
+
+/********************AUTH PAGES**********************************/
+.authPage {
+  min-height: 80vh;
+  padding: 150px 20px 40px 20px;
+  background: linear-gradient(176deg, #6868688c, transparent);
+}
+.authCard {
+  width: 100%;
+  max-width: 560px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+.authForm input,
+.authForm select {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.authForm button {
+  border: none;
+  border-radius: 8px;
+  background: #111;
+  color: #fff;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+.authError {
+  color: #b00020;
+}
+.authSuccess {
+  color: #046d38;
+}
+.inventoryCard {
+  max-width: 760px;
+}
+.inventoryList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+.inventoryList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
