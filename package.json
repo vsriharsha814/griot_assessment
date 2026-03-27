@@ -9,6 +9,7 @@
     "server": "node app",
     "lint": "eslint src --ext js,jsx",
     "test": "node --test \"server/tests/*.test.js\"",
+    "test:frontend": "vitest run",
     "test:e2e": "playwright test",
     "preview": "vite preview",
     "start": "npm-run-all --parallel server client",
@@ -38,6 +39,9 @@
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@playwright/test": "^1.58.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
@@ -46,6 +50,8 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
-    "vite": "^5.4.1"
+    "jsdom": "^27.0.1",
+    "vite": "^5.4.1",
+    "vitest": "^3.2.4"
   }
 }
