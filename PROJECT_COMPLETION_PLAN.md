@@ -80,7 +80,7 @@ This plan is based on the current repository state and the intended feature set 
 ## 4) Frontend Integration
 
 - ✅ Replace hardcoded data (`src/villas.js`) with backend API calls.
-- Create shared API client + request/error/loading handling.
+- ✅ (Partial) Create shared API client + request/error/loading handling.
 - Implement auth UI + protected routes.
 - Seller experience:
   - create/update own listings
@@ -120,7 +120,7 @@ This plan is based on the current repository state and the intended feature set 
   - route rendering
   - data-loading states
   - protected route behavior
-- ✅ (Partial) Add CI to run lint + tests on every PR.
+- ✅ Add CI to run lint + tests on every PR.
 - Add one smoke E2E flow for critical user journey.
 
 ### Exit Criteria

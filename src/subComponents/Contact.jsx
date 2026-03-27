@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { RiFacebookBoxLine, RiYoutubeLine, RiGithubLine } from "react-icons/ri";
+import { RiFacebookBoxLine } from "react-icons/ri";
 const SubContact = () => {
   return (
     <>
       <section id="contact_Mini">
         <div className="super_container">
         <div className="container_1">
-          <h3>Let's connect</h3>
+          <h3>Let&apos;s connect</h3>
           <div>
             <p>Phone</p>
             <span>+91 000 000 0000</span>
@@ -28,7 +28,7 @@ const SubContact = () => {
         </div>
         
         <div className="container_2">
-          <h3>We'd love to hear from you</h3>
+          <h3>We&apos;d love to hear from you</h3>
           <form>
             <div>
               <input type="text" placeholder="Your Name"/>

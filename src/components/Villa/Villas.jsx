@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import axios from 'axios';
+import { getAllProducts } from '../../api/products';
 import { RxDot } from "react-icons/rx";
 import { IoIosPeople } from "react-icons/io";
 import { FaBed } from "react-icons/fa";
@@ -16,8 +16,8 @@ const Villas = () => {
     const fetchVillas = async () => {
       try {
         setLoadError('');
-        const response = await axios.get('http://localhost:5000/api/products/getAll');
-        setApiVillas(Array.isArray(response.data) ? response.data : []);
+        const products = await getAllProducts();
+        setApiVillas(Array.isArray(products) ? products : []);
       } catch (error) {
         console.error('Error loading villas from API:', error);
         setLoadError('Unable to load properties right now.');

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { getProductById } from "../../api/products";
 
 const SingleVilla = () => {
   const { id } = useParams();
@@ -12,8 +12,8 @@ const SingleVilla = () => {
     const fetchVilla = async () => {
       try {
         setLoadError("");
-        const response = await axios.get(`http://localhost:5000/api/products/${id}`);
-        setApiVilla(response.data || null);
+        const product = await getProductById(id);
+        setApiVilla(product || null);
       } catch (error) {
         console.error("Error loading villa details from API:", error);
         setLoadError("Unable to load property details.");

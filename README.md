@@ -34,6 +34,7 @@ Copy `.env.example` to `.env` and update values:
 - `MONGODB_URI`
 - `JWT_SECRET`
 - `CLIENT_URL`
+- `VITE_API_BASE_URL`
 - `RATE_LIMIT_WINDOW_MS`
 - `RATE_LIMIT_MAX`
 

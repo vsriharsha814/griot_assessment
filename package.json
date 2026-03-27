@@ -7,6 +7,7 @@
     "build": "vite build",
     "client": "vite",
     "server": "node app",
+    "lint": "eslint src --ext js,jsx",
     "test": "node --test \"server/tests/*.test.js\"",
     "preview": "vite preview",
     "start": "npm-run-all --parallel server client",
