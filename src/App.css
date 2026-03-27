@@ -8,6 +8,23 @@
   font-family: "Raleway", sans-serif;
   font-size: 20px;
 }
+
+/* Buttons: hand cursor + no text-selection caret on labels (esp. non-submit CTAs) */
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+button:disabled,
+input[type="submit"]:disabled,
+input[type="button"]:disabled,
+input[type="reset"]:disabled {
+  cursor: not-allowed;
+}
+
 .italic {
   font-family: "Playfair Display", serif;
 }
@@ -1252,7 +1269,6 @@ h5 {
   background: #111;
   color: #fff;
   padding: 10px 12px;
-  cursor: pointer;
 }
 .authError {
   color: #b00020;
