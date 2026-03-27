@@ -9,6 +9,7 @@
     "server": "node app",
     "lint": "eslint src --ext js,jsx",
     "test": "node --test \"server/tests/*.test.js\"",
+    "test:e2e": "playwright test",
     "preview": "vite preview",
     "start": "npm-run-all --parallel server client",
     "prepare": "npm-run-all --parallel server client",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@playwright/test": "^1.58.2",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",

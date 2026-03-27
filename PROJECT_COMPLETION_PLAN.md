@@ -121,7 +121,7 @@ This plan is based on the current repository state and the intended feature set 
   - data-loading states
   - protected route behavior
 - ✅ Add CI to run lint + tests on every PR.
-- Add one smoke E2E flow for critical user journey.
+- ✅ Add one smoke E2E flow for critical user journey.
 
 ### Exit Criteria
 

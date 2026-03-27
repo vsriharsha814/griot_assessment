@@ -58,6 +58,12 @@ Run tests:
 npm test
 ```
 
+Run smoke E2E:
+
+```bash
+npm run test:e2e
+```
+
 ## API Summary
 
 Auth:
