@@ -53,18 +53,21 @@ const seedProducts = async () => {
       description: "A comfortable villa for relaxing nights.",
       startingBid: 1450,
       minBidAmount: 150,
+      region: "coastline",
     },
     {
       name: "Villa Luna USD",
       description: "Cozy stay with modern amenities.",
       startingBid: 850,
       minBidAmount: 100,
+      region: "mountains",
     },
     {
       name: "Aphrodite USD",
       description: "Seaside vibes and spacious rooms.",
       startingBid: 980,
       minBidAmount: 90,
+      region: "coastline",
     },
   ];
 

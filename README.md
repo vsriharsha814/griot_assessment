@@ -113,6 +113,7 @@ npm run seed -- --reset
 ## Schema Notes (MongoDB)
 
 - `Product.userId` links each listing to its seller.
+- Optional `Product.region` (e.g. `mountains`, `coastline`) powers the home “Our Regions” cards → `/villas?region=…`.
 - Bids are stored in `Product.bidHistory[]` with `bidderName`, `bidAmount`, and `bidTimestamp`.
 - Indexes:
   - `Product.userId` for seller inventory queries

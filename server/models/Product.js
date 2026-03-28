@@ -12,6 +12,8 @@ const productSchema = new mongoose.Schema({
   startingBid: { type: Number, required: true },
   minBidAmount: { type: Number, required: true },
   imageUrl: { type: String, default: "" },
+  /** e.g. "mountains" | "coastline" — used for home region cards → /villas?region=… */
+  region: { type: String, default: "" },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -24,6 +26,7 @@ const productSchema = new mongoose.Schema({
 // Indexes for performance and common query patterns.
 productSchema.index({ userId: 1 });
 productSchema.index({ name: "text" });
+productSchema.index({ region: 1 });
 
 
 const Product = mongoose.model('Product', productSchema);

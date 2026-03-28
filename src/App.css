@@ -372,6 +372,9 @@ h5 {
   position: relative;
   padding-left: 30px;
   overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 #regions .card img {
   position: absolute;
@@ -965,8 +968,20 @@ h5 {
 }
 .villaFilters {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin: 10px 0 20px 0;
+  align-items: center;
+}
+.villaFilters .regionFilterBanner {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 8px 0;
+  color: #fff;
+}
+.villaFilters .regionFilterBanner a {
+  color: #f5e9d6;
+  text-decoration: underline;
 }
 .villaFilters input {
   border: 1px solid #ddd;

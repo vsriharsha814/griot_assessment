@@ -6,7 +6,7 @@ require("dotenv").config();
 exports.createProduct = async (req, res) => {
     try {
         // const imagePath = req.file.path;
-        const { name, description, startingBid, minBidAmount } = req.body;
+        const { name, description, startingBid, minBidAmount, region } = req.body;
         const imagePath = req.file ? req.file.path : "";
         console.log("request recieved", req.body);
         const newProduct = new Product({
@@ -14,6 +14,7 @@ exports.createProduct = async (req, res) => {
             description,
             startingBid,
             minBidAmount,
+            region: typeof region === "string" ? region.trim() : "",
             imageUrl: imagePath || "",
             userId: req.user?._id,
         });
@@ -138,7 +139,7 @@ exports.getInventoryForUser = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
     const { productId } = req.params;
-    const { name, description, startingBid, minBidAmount } = req.body;
+    const { name, description, startingBid, minBidAmount, region } = req.body;
 
     try {
         // Find the product by productId
@@ -157,6 +158,7 @@ exports.updateProduct = async (req, res) => {
         if (description !== undefined) product.description = description;
         if (startingBid !== undefined) product.startingBid = startingBid;
         if (minBidAmount !== undefined) product.minBidAmount = minBidAmount;
+        if (region !== undefined) product.region = typeof region === "string" ? region.trim() : "";
 
         // Save the updated product
         await product.save();

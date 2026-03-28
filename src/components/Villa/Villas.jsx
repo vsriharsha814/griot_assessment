@@ -5,11 +5,14 @@ import { IoIosPeople } from "react-icons/io";
 import { FaBed } from "react-icons/fa";
 import { BiArea } from "react-icons/bi";
 import { FaBath } from "react-icons/fa6";
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { formatUSD } from '../../utils/currency';
 import { mediaUrl } from '../../utils/media';
 
 const Villas = () => {
+  const [searchParams] = useSearchParams();
+  const regionFilter = (searchParams.get('region') || '').trim().toLowerCase();
+
   const [apiVillas, setApiVillas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
@@ -38,7 +41,8 @@ const Villas = () => {
       id: villa._id,
       name: villa.name || 'Untitled Villa',
       location: 'Unknown',
-      category: 'Property',
+      category: villa.region ? villa.region.charAt(0).toUpperCase() + villa.region.slice(1) : 'Property',
+      region: (villa.region || '').toLowerCase(),
       guests: 0,
       bedrooms: 0,
       bathrooms: 0,
@@ -53,14 +57,16 @@ const Villas = () => {
     const maxRent = maxDailyRent ? Number(maxDailyRent) : null;
 
     return villas.filter((villa) => {
+      const matchesRegion =
+        !regionFilter || villa.region === regionFilter;
       const matchesSearch =
         !normalizedSearch ||
         villa.name.toLowerCase().includes(normalizedSearch) ||
         villa.category.toLowerCase().includes(normalizedSearch);
       const matchesRent = maxRent === null || Number(villa.dailyRent) <= maxRent;
-      return matchesSearch && matchesRent;
+      return matchesRegion && matchesSearch && matchesRent;
     });
-  }, [villas, searchTerm, maxDailyRent]);
+  }, [villas, searchTerm, maxDailyRent, regionFilter]);
 
   return (
     <>
@@ -70,6 +76,12 @@ const Villas = () => {
           {!loading && loadError && <p>{loadError}</p>}
           {!loading && !loadError ? (
             <div className="villaFilters">
+              {regionFilter ? (
+                <p className="regionFilterBanner">
+                  Showing <strong>{regionFilter}</strong> listings.{' '}
+                  <Link to="/villas">Clear region filter</Link>
+                </p>
+              ) : null}
               <input
                 type="text"
                 placeholder="Search by name"
