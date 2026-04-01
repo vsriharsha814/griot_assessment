@@ -11,7 +11,7 @@
     "client": "vite",
     "server": "node app",
     "lint": "eslint src --ext js,jsx",
-    "test": "node --test \"server/tests/*.test.js\"",
+    "test": "node --test server/tests/auth.middleware.test.js server/tests/authValidation.test.js server/tests/bidValidation.test.js server/tests/productOwnership.test.js",
     "test:frontend": "vitest run",
     "test:e2e": "playwright test",
     "seed": "node server/seed.js",

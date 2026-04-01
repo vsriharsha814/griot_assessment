@@ -18,7 +18,7 @@ Thanks for helping improve this project. The steps below match what CI enforces 
 | Command | Purpose |
 |--------|---------|
 | `npm run lint` | ESLint on `src` (`*.js`, `*.jsx`) |
-| `npm test` | Backend tests (`node --test` on `server/tests/`) |
+| `npm test` | Backend tests (`node --test` on explicit files under `server/tests/` — add new `*.test.js` files to the `test` script in `package.json`) |
 | `npm run test:frontend` | Vitest + React Testing Library (`src/tests/`) |
 | `npm run test:e2e` | Playwright smoke tests (Chromium; run `npx playwright install chromium` once locally if needed) |
 
