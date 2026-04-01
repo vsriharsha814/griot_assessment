@@ -1,5 +1,6 @@
 const { defineConfig } = require("vitest/config");
-const react = require("@vitejs/plugin-react-swc");
+// Same React plugin as vite.config.js — @vitejs/plugin-react-swc pulls @swc/core native binaries that often break on Linux CI.
+const react = require("@vitejs/plugin-react");
 
 module.exports = defineConfig({
   plugins: [react()],

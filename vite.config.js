@@ -1,5 +1,5 @@
 const { defineConfig } = require("vite");
-const react = require("@vitejs/plugin-react-swc");
+const react = require("@vitejs/plugin-react");
 
 module.exports = defineConfig({
   plugins: [react()],
