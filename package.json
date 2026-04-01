@@ -17,7 +17,6 @@
     "seed": "node server/seed.js",
     "preview": "vite preview",
     "start": "npm-run-all --parallel server client",
-    "prepare": "npm-run-all --parallel server client",
     "line": "npm-run-all --parallel server client"
   },
   "dependencies": {

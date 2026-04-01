@@ -10,7 +10,7 @@ Thanks for helping improve this project. The steps below match what CI enforces 
 ## First-time setup
 
 1. Copy environment template: `cp .env.example .env` and set secrets (`JWT_SECRET`, emails/passwords for seed if used).
-2. Install dependencies: `npm ci` (use `npm install` only if you are not reproducing a lockfile-driven install).
+2. Install dependencies: `npm ci`. **Commit `package-lock.json`** with changes that affect dependencies—CI uses `npm ci` and requires the lockfile in the repo. (Use `npm install` only when intentionally updating the lockfile.)
 3. Optional: `npm run seed` to load demo users and listings.
 
 ## Commands (aligned with CI)
